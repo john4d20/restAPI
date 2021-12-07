@@ -1,10 +1,7 @@
 package com.example.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,15 @@ public class CompanyController {
         return companyRepository.findById(id);
     }
 
+    @GetMapping("/{id}/employees")
+    public List<Employee> getEmployeesById(@PathVariable Integer id) {
+        return companyRepository.findEmployeeById(id);
+    }
+
+    @GetMapping(params = {"page", "pageSize"})
+    public List<Company> getEmployeeByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+        return companyRepository.findByPage(page, pageSize);
+    }
 }
 
 
