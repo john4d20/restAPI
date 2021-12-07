@@ -65,6 +65,11 @@ public class CompanyRepository {
         companies.add(updatedCompany);
         return company;
     }
+
+    public Company delete(Company company) {
+        companies.remove(company);
+        return company;
+    }
 }
 
 

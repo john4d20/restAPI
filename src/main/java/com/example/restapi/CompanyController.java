@@ -38,12 +38,12 @@ public class CompanyController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Company createEmployee(@RequestBody Company company){
+    public Company createCompany(@RequestBody Company company){
         return companyRepository.create(company);
     }
 
     @PutMapping("/{id}")
-    public Company editEmployee(@PathVariable Integer id, @RequestBody Company updatedCompany){
+    public Company editCompany(@PathVariable Integer id, @RequestBody Company updatedCompany){
         Company company = companyRepository.findById(id);
         if(updatedCompany.getCompanyName() != null){
             company.setCompanyName(updatedCompany.getCompanyName());}
@@ -52,6 +52,13 @@ public class CompanyController {
         }
         return companyRepository.save(id,updatedCompany);
 
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public Company deleteCompany(@PathVariable Integer id){
+        Company company = companyRepository.findById(id);
+        return companyRepository.delete(company);
     }
 }
 
