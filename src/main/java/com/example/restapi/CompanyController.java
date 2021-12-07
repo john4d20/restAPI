@@ -1,6 +1,7 @@
 package com.example.restapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,12 @@ public class CompanyController {
     @GetMapping(params = {"page", "pageSize"})
     public List<Company> getEmployeeByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
         return companyRepository.findByPage(page, pageSize);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Company createEmployee(@RequestBody Company company){
+        return companyRepository.create(company);
     }
 }
 
