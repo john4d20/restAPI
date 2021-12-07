@@ -1,6 +1,7 @@
 package com.example.restapi;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,4 +21,8 @@ public class EmployeeController {
         return employeeRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Emplyoee getEmployeeById(@PathVariable Integer id) {
+        return employeeRepository.findById(id);
+    }
 }

@@ -16,4 +16,11 @@ public class EmployeeRepository {
     public List<Emplyoee> findAll() {
         return emplyoees;
     }
+
+    public Emplyoee findById(Integer id) {
+        return emplyoees.stream()
+                .filter(emplyoee -> emplyoee.getId().equals(id))
+                .findFirst()
+                .orElseThrow(NoFoundEmployeeException::new);
+    }
 }
