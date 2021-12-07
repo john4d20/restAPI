@@ -40,6 +40,18 @@ public class EmployeeController {
     public Employee createEmployee(@RequestBody Employee employee){
         return employeeRepository.create(employee);
     }
+    
+    @PutMapping("/{id}")
+    public Employee editEmployee(@PathVariable Integer id, @RequestBody Employee updatedEmplpyee){
+        Employee employee = employeeRepository.findById(id);
+        if(updatedEmplpyee.getAge() != null){
+            employee.setAge(updatedEmplpyee.getAge());}
+        if(updatedEmplpyee.getId() != null){}{
+            employee.setSalary(updatedEmplpyee.getSalary());    
+        }
+        return employeeRepository.save(id,employee);
+        
+    }
 
 
 

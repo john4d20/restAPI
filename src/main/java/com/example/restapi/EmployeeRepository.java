@@ -53,4 +53,11 @@ public class EmployeeRepository {
         }
         return null;
     }
+
+    public Employee save(Integer id, Employee updatedEmployee) {
+        Employee employee = findById(id);
+        employees.remove(employee);
+        employees.add(updatedEmployee);
+        return employee;
+    }
 }
