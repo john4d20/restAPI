@@ -44,6 +44,7 @@ public class CompanyRepository {
                 .skip((long) (page - 1)* pageSize )
                 .limit(pageSize)
                 .collect(Collectors.toList());
+
     }
 }
 
