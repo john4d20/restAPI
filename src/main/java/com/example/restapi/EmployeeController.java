@@ -42,15 +42,22 @@ public class EmployeeController {
     }
     
     @PutMapping("/{id}")
-    public Employee editEmployee(@PathVariable Integer id, @RequestBody Employee updatedEmplpyee){
+    public Employee editEmployee(@PathVariable Integer id, @RequestBody Employee updatedEmployee){
         Employee employee = employeeRepository.findById(id);
-        if(updatedEmplpyee.getAge() != null){
-            employee.setAge(updatedEmplpyee.getAge());}
-        if(updatedEmplpyee.getId() != null){}{
-            employee.setSalary(updatedEmplpyee.getSalary());    
+        if(updatedEmployee.getAge() != null){
+            employee.setAge(updatedEmployee.getAge());}
+        if(updatedEmployee.getId() != null){}{
+            employee.setSalary(updatedEmployee.getSalary());
         }
         return employeeRepository.save(id,employee);
         
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public Employee deleteEmployee(@PathVariable Integer id){
+        Employee employee = employeeRepository.findById(id);
+        return employeeRepository.delete(employee);
     }
 
 

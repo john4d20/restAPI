@@ -60,4 +60,10 @@ public class EmployeeRepository {
         employees.add(updatedEmployee);
         return employee;
     }
+
+    public Employee delete(Employee employee) {
+        employees.remove(employee);
+        return employee;
+
+    }
 }
