@@ -41,6 +41,18 @@ public class CompanyController {
     public Company createEmployee(@RequestBody Company company){
         return companyRepository.create(company);
     }
+
+    @PutMapping("/{id}")
+    public Company editEmployee(@PathVariable Integer id, @RequestBody Company updatedCompany){
+        Company company = companyRepository.findById(id);
+        if(updatedCompany.getCompanyName() != null){
+            company.setCompanyName(updatedCompany.getCompanyName());}
+        if(updatedCompany.getEmployees() != null){}{
+            company.setEmployees(updatedCompany.getEmployees());
+        }
+        return companyRepository.save(id,updatedCompany);
+
+    }
 }
 
 

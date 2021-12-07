@@ -58,6 +58,13 @@ public class CompanyRepository {
         }
         return null;
     }
+
+    public Company save(Integer id, Company updatedCompany) {
+        Company company = findById(id);
+        companies.remove(company);
+        companies.add(updatedCompany);
+        return company;
+    }
 }
 
 
