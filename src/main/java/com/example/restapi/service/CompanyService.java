@@ -35,6 +35,9 @@ public class CompanyService {
     public Company createCompany(Company company) {
         return companyRepository.create(company);
     }
+    public Company findById(int companyId) {
+        return companyRepository.findById(companyId);
+    }
 
 }
 
