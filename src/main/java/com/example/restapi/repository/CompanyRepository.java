@@ -1,5 +1,6 @@
 package com.example.restapi.repository;
 
+import com.example.restapi.exception.NoCompanyFoundException;
 import com.example.restapi.exception.NoFoundEmployeeException;
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
@@ -32,7 +33,7 @@ public class CompanyRepository {
         return companies.stream()
                 .filter(company -> company.getId().equals(id))
                 .findFirst()
-                .orElseThrow(NoFoundEmployeeException::new);
+                .orElseThrow(NoCompanyFoundException::new);
     }
 
     public List<Employee> findEmployeeById(Integer id) {
