@@ -121,8 +121,26 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[1].id").value(2))
                 .andExpect(jsonPath("$[2].id").value(3));
-        //then
     }
 
+    @Test
+    void should_return_edited_employee_when_perform_put_given_updated_employee() throws Exception {
+        //given
+        Employee employee = new Employee(1,"john",20,"male",1000);
+        employeeRepository.create(employee);
+
+        String updatedEmployee = "{\"id\": 1,\n" +
+                "                \"name\": \"john\",\n" +
+                "                \"age\": 18,\n" +
+                "                \"gender\": \"male\",\n" +
+                "                \"salary\": 1100}";
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/employees/{id}", employee.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedEmployee))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.age").value(18))
+                .andExpect(jsonPath("$.salary").value(1100));
+    }
 
 }
