@@ -1,6 +1,7 @@
 package com.example.restapi;
 
 import com.example.restapi.entity.Company;
+import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.service.CompanyService;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
 
+
 @ExtendWith(SpringExtension.class)
 public class CompanyServiceTest {
+    private List<Employee> getEmployees() {
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, "john", 22, "male", 1000, 1));
+        employees.add(new Employee(2, "john", 22, "male", 1000, 1));
+        return employees;
+    }
     @Mock
     CompanyRepository mockCompanyRepository;
 
@@ -50,4 +58,23 @@ public class CompanyServiceTest {
         //then
         assertEquals(companies.get(0), actual);
     }
+
+    @Test
+    void should_get_all_employee_under_company_when_obtain_employee_list_given_employees_and_company() throws Exception {
+        //given
+
+        List<Employee> employees = getEmployees();
+        List<Company> companies = new ArrayList<>();
+        companies.add(new Company(1, "OOCL"));
+        companies.add(new Company(2, "OOCL2"));
+
+        given(mockCompanyRepository.findEmployeeById(1))
+                .willReturn(employees);
+        //when`
+        List<Employee> actual = companyService.findEmployeeById(1);
+        //then
+        assertEquals(employees, actual);
+    }
+
+
 }

@@ -23,8 +23,8 @@ public class CompanyService {
         return companyRepository.save(id, company);
     }
 
-    public Company findEmployeeById(Integer id) {
-        return companyRepository.findById(id);
+    public List<Employee> findEmployeeById(Integer id) {
+        return companyRepository.findEmployeeById(id);
     }
 
 
