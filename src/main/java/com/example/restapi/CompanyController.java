@@ -32,7 +32,7 @@ public class CompanyController {
     }
 
     @GetMapping(params = {"page", "pageSize"})
-    public List<Company> getByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+    public List<Company> getCompanyByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
         return companyRepository.findByPage(page, pageSize);
     }
 
