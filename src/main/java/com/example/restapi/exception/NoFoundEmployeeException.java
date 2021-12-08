@@ -1,4 +1,4 @@
-package com.example.restapi;
+package com.example.restapi.exception;
 
 public class NoFoundEmployeeException extends RuntimeException {
     public NoFoundEmployeeException() {
