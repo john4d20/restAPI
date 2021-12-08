@@ -93,8 +93,31 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$[0].age").value("20"))
                 .andExpect(jsonPath("$[0].gender").value("male"))
                 .andExpect(jsonPath("$[0].salary").value("2000"))
-                .andExpect(jsonPath("$[0].companyId").value("1"));
+                .andExpect(jsonPath("$[0].companyId").value("1"))
+                .andExpect(jsonPath("$[1].name").value("john2"))
+                .andExpect(jsonPath("$[1].age").value("20"))
+                .andExpect(jsonPath("$[1].gender").value("male"))
+                .andExpect(jsonPath("$[1].salary").value("2000"))
+                .andExpect(jsonPath("$[1].companyId").value("1"));
 
+    }
+
+    @Test
+    void should_get_all_companies_when_get_by_page_given_page_and_pageSize_and_company() throws Exception {
+        Company company1 = new Company(1, "Spring");
+        Company company2 = new Company(2, "Spring2");
+        Company company3 = new Company(3, "Spring3");
+
+        companyRepository.create(company1);
+        companyRepository.create(company2);
+        companyRepository.create(company3);
+
+        String page = "1";
+        String pageSize = "2";
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/companies?page="+page+"&pageSize="+pageSize))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)));
     }
 
 }
