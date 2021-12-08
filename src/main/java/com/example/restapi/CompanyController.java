@@ -22,17 +22,17 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
-    public Company getEmployeeById(@PathVariable Integer id) {
+    public Company getCompanyById(@PathVariable Integer id) {
         return companyRepository.findById(id);
     }
 
     @GetMapping("/{id}/employees")
-    public List<Employee> getEmployeesById(@PathVariable Integer id) {
+    public List<Employee> getEmployeesByCompanyId(@PathVariable Integer id) {
         return companyRepository.findEmployeeById(id);
     }
 
     @GetMapping(params = {"page", "pageSize"})
-    public List<Company> getEmployeeByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
+    public List<Company> getByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
         return companyRepository.findByPage(page, pageSize);
     }
 
