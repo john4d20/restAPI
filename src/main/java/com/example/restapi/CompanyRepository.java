@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class CompanyRepository {
     private List<Company> companies = new ArrayList<>();
 
-    private List<Employee> employees = Arrays.asList(new Employee(1,"john",20,"male",2000),
-            new Employee(2,"john2",20,"male",2000));
+    private List<Employee> employees = Arrays.asList(new Employee(1,"john",20,"male",2000,1),
+            new Employee(2,"john2",20,"male",2000,1));
 
 
     public CompanyRepository() {

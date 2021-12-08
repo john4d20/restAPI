@@ -11,11 +11,11 @@ public class EmployeeRepository {
     private List<Employee> employees = new ArrayList<>();
 
     public EmployeeRepository() {
-        employees.add(new Employee(1,"john",20,"male",2000));
-        employees.add(new Employee(2,"john2",20,"male",2000));
-        employees.add(new Employee(3,"john3",20,"male",2000));
-        employees.add(new Employee(4,"john4",20,"male",2000));
-        employees.add(new Employee(5,"john5",20,"male",2000));
+        employees.add(new Employee(1,"john",20,"male",2000,1));
+        employees.add(new Employee(2,"john2",20,"male",2000,1));
+        employees.add(new Employee(3,"john3",20,"male",2000,1));
+        employees.add(new Employee(4,"john4",20,"male",2000,1));
+        employees.add(new Employee(5,"john5",20,"male",2000,1));
     }
 
     public List<Employee> findAll() {
