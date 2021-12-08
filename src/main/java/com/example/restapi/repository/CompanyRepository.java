@@ -3,6 +3,7 @@ package com.example.restapi.repository;
 import com.example.restapi.exception.NoFoundEmployeeException;
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,15 +13,15 @@ import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
-    private List<Company> companies = new ArrayList<>();
+    @Autowired
+    EmployeeRepository employeeRepository;
 
-    private List<Employee> employees = Arrays.asList(new Employee(1,"john",20,"male",2000,1),
-            new Employee(2,"john2",20,"male",2000,1));
+    private List<Company> companies = new ArrayList<>();
 
 
     public CompanyRepository() {
-        companies.add(new Company(1,"hater",employees));
-        companies.add(new Company(2,"hater2",employees));
+        companies.add(new Company(1,"hater"));
+        companies.add(new Company(2,"hater2"));
     }
 
     public List<Company> findAll() {
@@ -35,12 +36,9 @@ public class CompanyRepository {
     }
 
     public List<Employee> findEmployeeById(Integer id) {
-        Company companyById = companies.stream()
-                .filter(company -> company.getId().equals(id))
-                .findFirst()
-                .orElseThrow(NoFoundEmployeeException::new);
-        return companyById.getEmployees();
+        return employeeRepository.findByCompanyId(id);
     }
+
 
     public List<Company> findByPage(Integer page, Integer pageSize) {
         return companies.stream()
@@ -51,15 +49,10 @@ public class CompanyRepository {
 
 
     public Company create(Company company) {
-        Integer nextId = employees.stream()
-                .mapToInt(Employee::getId)
-                .max()
-                .orElse(0)+1;
+        Integer nextId = companies.stream().mapToInt(Company::getId).max().orElse(0) + 1;
         company.setId(nextId);
-        if (companies.add(company)){
-            return company;
-        }
-        return null;
+        this.companies.add(company);
+        return company;
     }
 
     public Company save(Integer id, Company updatedCompany) {

@@ -5,12 +5,12 @@ import java.util.List;
 public class Company {
     private Integer id;
     private String companyName;
-    private List<Employee> employees;
 
-    public Company(Integer id, String companyName, List<Employee> employees) {
+
+    public Company(Integer id, String companyName) {
         this.id = id;
         this.companyName = companyName;
-        this.employees = employees;
+
     }
 
     public void setId(Integer id) {
@@ -21,9 +21,7 @@ public class Company {
         this.companyName = companyName;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
-    }
+
 
     public Integer getId() {
         return id;
@@ -33,7 +31,4 @@ public class Company {
         return companyName;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
-    }
 }

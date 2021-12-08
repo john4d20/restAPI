@@ -49,9 +49,6 @@ public class CompanyController {
         Company company = companyRepository.findById(id);
         if(updatedCompany.getCompanyName() != null){
             company.setCompanyName(updatedCompany.getCompanyName());}
-        if(updatedCompany.getEmployees() != null){}{
-            company.setEmployees(updatedCompany.getEmployees());
-        }
         return companyRepository.save(id,updatedCompany);
 
     }
