@@ -76,6 +76,16 @@ public class CompanyServiceTest {
         assertEquals(employees, actual);
     }
 
-
+    @Test
+    void should_return_company_when_perform_post_given_company() throws Exception {
+        //given
+        Company newCompany = new Company(3, "OOCL3");
+        given(mockCompanyRepository.create(newCompany))
+                .willReturn(newCompany);
+        //when
+        Company actual = companyService.createCompany(newCompany);
+        //then
+        assertEquals(newCompany, actual);
+    }
 
 }
