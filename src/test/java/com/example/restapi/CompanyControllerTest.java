@@ -59,4 +59,22 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$[1].companyName").value("Spring2"));
 
     }
+
+    @Test
+    void should_get_company_when_perform_getById_given_company_and_id() throws Exception {
+        //given
+        List<Employee> employees = getEmployees();
+        Company company1 = new Company(1, "Spring");
+        Company company2 = new Company(2, "Spring2");
+
+        companyRepository.create(company1);
+        companyRepository.create(company2);
+
+        //when
+        //then
+        mockMvc.perform(MockMvcRequestBuilders.get("/companies/{id}", company1.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.companyName").value("Spring"));
+    }
 }
