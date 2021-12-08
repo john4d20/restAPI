@@ -35,17 +35,12 @@ public class CompanyControllerTest {
         companyRepository.clearAll();
     }
 
-//    List<Employee> getEmployees() {
-//        List<Employee> employees = new ArrayList<>();
-//        employees.add(new Employee(1, "john", 19, "Male", 100, 1));
-//        employees.add(new Employee(2, "joanne", 22, "Female", 200, 1));
-//        return employees;
-//    }
+
 
     @Test
     void should_get_all_companies_when_perform_get_given_companies() throws Exception {
         //given
-//        List<Employee> employees = getEmployees();
+
         Company company1 = new Company(1, "Spring");
         Company company2 = new Company(2, "Spring2");
 
@@ -164,6 +159,22 @@ public class CompanyControllerTest {
                         .content(company))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.companyName").value("hater3"));
+    }
+
+    @Test
+    void should_delete_company_when_perform_delete_given_company_and_id() throws Exception {
+        //given
+        Company company1 = new Company(1, "Spring");
+        Company company2 = new Company(2, "Spring2");
+        Company company3 = new Company(3, "Spring3");
+
+        companyRepository.create(company1);
+        companyRepository.create(company2);
+        companyRepository.create(company3);
+        //when
+        //then
+        mockMvc.perform(MockMvcRequestBuilders.delete("/companies/{id}", company1.getId()))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
 }
