@@ -70,12 +70,10 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$[0].salary").value(1000));
 
     }
-
     
     @Test
     void should_return_employee_when_perform_given_employee() throws Exception {
         //given
-//        Employee employee = new Employee(1,"john",20,"male",1000);
         String employee = "{\"id\": 1,\n" +
                 "                \"name\": \"john\",\n" +
                 "                \"age\": 20,\n" +
@@ -92,6 +90,20 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$.salary").value(1000));
         //then
     }
-    
+
+    @Test
+    void should_return_employee_when_perform_get_given_employee_id() throws Exception {
+        //given
+        Employee employee = new Employee(1,"john",20,"male",1000);
+        employeeRepository.create(employee);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/employees/{id}", employee.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").isNumber())
+                .andExpect(jsonPath("$.name").value("john"))
+                .andExpect(jsonPath("$.age").value(20))
+                .andExpect(jsonPath("$.gender").value("male"))
+                .andExpect(jsonPath("$.salary").value(1000));
+    }
 
 }
