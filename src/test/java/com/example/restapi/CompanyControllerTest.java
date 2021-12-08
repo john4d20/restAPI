@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -137,6 +138,31 @@ public class CompanyControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(company))
                 .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.companyName").value("hater3"));
+    }
+
+    @Test
+    void should_return_changed_company_when_perform_put_given_company_id() throws Exception {
+        //given
+        Company company1 = new Company(1, "Spring");
+        Company company2 = new Company(2, "Spring2");
+        Company company3 = new Company(3, "Spring3");
+
+        companyRepository.create(company1);
+        companyRepository.create(company2);
+        companyRepository.create(company3);
+
+        String company = "{\n" +
+                "        \"id\": 1,\n" +
+                "        \"companyName\": \"hater3\"\n" +
+                "    }";
+
+        //when
+        //then
+        mockMvc.perform(put("/companies/{id}", company1.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(company))
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.companyName").value("hater3"));
     }
 
