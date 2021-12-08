@@ -25,7 +25,7 @@ public class EmployeeController {
     }
 
     @GetMapping(params = "{gender}")
-    public List<Employee> getEmployeeByGender(@PathVariable String gender){
+    public List<Employee> getEmployeeByGender(@RequestParam String gender){
         return employeeRepository.findByGender(gender);
     }
 
