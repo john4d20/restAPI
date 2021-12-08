@@ -31,17 +31,17 @@ public class CompanyControllerTest {
         companyRepository.clearAll();
     }
 
-    List<Employee> getEmployees() {
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(1, "John", 19, "Male", 100, 1));
-        employees.add(new Employee(2, "Joanne", 22, "Female", 200, 1));
-        return employees;
-    }
+//    List<Employee> getEmployees() {
+//        List<Employee> employees = new ArrayList<>();
+//        employees.add(new Employee(1, "john", 19, "Male", 100, 1));
+//        employees.add(new Employee(2, "joanne", 22, "Female", 200, 1));
+//        return employees;
+//    }
 
     @Test
     void should_get_all_companies_when_perform_get_given_companies() throws Exception {
         //given
-        List<Employee> employees = getEmployees();
+//        List<Employee> employees = getEmployees();
         Company company1 = new Company(1, "Spring");
         Company company2 = new Company(2, "Spring2");
 
@@ -63,7 +63,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_company_when_perform_getById_given_company_and_id() throws Exception {
         //given
-        List<Employee> employees = getEmployees();
+//        List<Employee> employees = getEmployees();
         Company company1 = new Company(1, "Spring");
         Company company2 = new Company(2, "Spring2");
 
@@ -77,4 +77,24 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.companyName").value("Spring"));
     }
+
+    @Test
+    void should_get_all_employee_when_get_list_given_company_id() throws Exception {
+        //given
+        Company company1 = new Company(1, "Spring");
+
+        companyRepository.findEmployeeById(1);
+        //when`
+        //then
+        mockMvc.perform(MockMvcRequestBuilders.get("/companies/{id}/employees" , company1.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(jsonPath("$[0].id").isNumber())
+                .andExpect(jsonPath("$[0].name").value("john"))
+                .andExpect(jsonPath("$[0].age").value("20"))
+                .andExpect(jsonPath("$[0].gender").value("male"))
+                .andExpect(jsonPath("$[0].salary").value("2000"))
+                .andExpect(jsonPath("$[0].companyId").value("1"));
+
+    }
+
 }
