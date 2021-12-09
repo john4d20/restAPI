@@ -1,7 +1,7 @@
 package com.example.restapi;
 
 import com.example.restapi.entity.Company;
-import com.example.restapi.entity.Employee;
+
 import com.example.restapi.repository.CompanyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -176,5 +174,7 @@ public class CompanyControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/companies/{id}", company1.getId()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
+
+    //todo Exception
 
 }

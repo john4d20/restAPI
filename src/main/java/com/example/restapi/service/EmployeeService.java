@@ -14,7 +14,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee edit(Integer id, Employee updatedEmployee) {
+    public Employee edit(String id, Employee updatedEmployee) {
         Employee employee = employeeRepository.findById(id);
         if (updatedEmployee.getAge() != null) {   //  !.equals(0)
             employee.setAge(updatedEmployee.getAge());
@@ -25,7 +25,7 @@ public class EmployeeService {
         return employeeRepository.save(id, employee);
     }
 
-    public Employee findById(Integer id) {
+    public Employee findById(String id) {
         return employeeRepository.findById(id);
     }
 

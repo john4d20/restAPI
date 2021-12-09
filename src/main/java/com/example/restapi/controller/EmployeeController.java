@@ -22,7 +22,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Integer id) {
+    public Employee getEmployeeById(@PathVariable String id) {
         return employeeRepository.findById(id);
     }
 
@@ -44,7 +44,7 @@ public class EmployeeController {
     }
     
     @PutMapping("/{id}")
-    public Employee editEmployee(@PathVariable Integer id, @RequestBody Employee updatedEmployee){
+    public Employee editEmployee(@PathVariable String id, @RequestBody Employee updatedEmployee){
         Employee employee = employeeRepository.findById(id);
         if(updatedEmployee.getAge() != null){
             employee.setAge(updatedEmployee.getAge());}
@@ -57,7 +57,7 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public Employee deleteEmployee(@PathVariable Integer id){
+    public Employee deleteEmployee(@PathVariable String id){
         Employee employee = employeeRepository.findById(id);
         return employeeRepository.delete(employee);
     }

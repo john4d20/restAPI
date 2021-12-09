@@ -21,8 +21,8 @@ import static org.mockito.BDDMockito.given;
 public class CompanyServiceTest {
     private List<Employee> getEmployees() {
         List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(1, "john", 22, "male", 1000, 1));
-        employees.add(new Employee(2, "john", 22, "male", 1000, 1));
+        employees.add(new Employee("1", "john", 22, "male", 1000, 1));
+        employees.add(new Employee("2", "john", 22, "male", 1000, 1));
         return employees;
     }
     @Mock
@@ -59,6 +59,7 @@ public class CompanyServiceTest {
         assertEquals(companies.get(0), actual);
     }
 
+//    TODO: findEmployeesByCompanyId
     @Test
     void should_get_all_employee_under_company_when_obtain_employee_list_given_employees_and_company() throws Exception {
         //given

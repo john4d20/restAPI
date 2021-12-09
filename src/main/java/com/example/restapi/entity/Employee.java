@@ -1,14 +1,14 @@
 package com.example.restapi.entity;
 
 public class Employee {
-    private Integer id;
+    private String id;
     private String name;
     private Integer age;
     private String gender;
     private Integer salary;
     private Integer companyId;
 
-    public Employee(Integer id, String name, Integer age, String gender, Integer salary,Integer companyId) {
+    public Employee(String id, String name, Integer age, String gender, Integer salary,Integer companyId) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -25,7 +25,7 @@ public class Employee {
         this.companyId = companyId;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -45,7 +45,7 @@ public class Employee {
         return salary;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

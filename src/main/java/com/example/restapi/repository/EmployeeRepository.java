@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @Repository
@@ -13,18 +14,18 @@ public class EmployeeRepository {
     private List<Employee> employees = new ArrayList<>();
 
     public EmployeeRepository() {
-        employees.add(new Employee(1,"john",20,"male",2000,1));
-        employees.add(new Employee(2,"john2",20,"male",2000,1));
-        employees.add(new Employee(3,"john3",20,"male",2000,1));
-        employees.add(new Employee(4,"john4",20,"male",2000,1));
-        employees.add(new Employee(5,"john5",20,"male",2000,1));
+        employees.add(new Employee("1","john",20,"male",2000,1));
+        employees.add(new Employee("2","john2",20,"male",2000,1));
+        employees.add(new Employee("3","john3",20,"male",2000,1));
+        employees.add(new Employee("4","john4",20,"male",2000,1));
+        employees.add(new Employee("5","john5",20,"male",2000,1));
     }
 
     public List<Employee> findAll() {
         return employees;
     }
 
-    public Employee findById(Integer id) {
+    public Employee findById(String id) {
         return employees.stream()
                 .filter(employee -> employee.getId().equals(id))
                 .findFirst()
@@ -45,18 +46,13 @@ public class EmployeeRepository {
     }
 
     public Employee create(Employee employee) {
-        Integer nextId = employees.stream()
-                .mapToInt(Employee::getId)
-                .max()
-                .orElse(0)+1;
-        employee.setId(nextId);
-        if (employees.add(employee)){
-            return employee;
-        }
-        return null;
+        String id = String.valueOf(employees.size()+1);
+        employee.setId(id);
+        employees.add(employee);
+        return employee;
     }
 
-    public Employee save(Integer id, Employee updatedEmployee) {
+    public Employee save(String id, Employee updatedEmployee) {
         Employee employee = findById(id);
         employees.remove(employee);
         employees.add(updatedEmployee);
