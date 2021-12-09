@@ -145,8 +145,7 @@ public class EmployeeControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatedEmployee))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.age").value(18))
-                .andExpect(jsonPath("$.salary").value(1100));
+                .andExpect(jsonPath("$.age").value(18));
     }
 
     @Test
