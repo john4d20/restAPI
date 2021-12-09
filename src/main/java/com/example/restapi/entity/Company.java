@@ -13,6 +13,10 @@ public class Company {
 
     }
 
+    public Company() {
+
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }

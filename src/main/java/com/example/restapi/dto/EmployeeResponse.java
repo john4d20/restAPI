@@ -1,13 +1,20 @@
 package com.example.restapi.dto;
 
-public class EmployeeRequest {
+public class EmployeeResponse {
+    private String id;
     private String name;
     private Integer age;
     private String gender;
-    private Integer salary;
-    private String companyId;
 
-    public EmployeeRequest() {
+    public EmployeeResponse() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -32,21 +39,5 @@ public class EmployeeRequest {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Integer getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Integer salary) {
-        this.salary = salary;
-    }
-
-    public String getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
     }
 }

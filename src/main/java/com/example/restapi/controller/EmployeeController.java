@@ -1,65 +1,81 @@
 package com.example.restapi.controller;
 
+import com.example.restapi.dto.EmployeeRequest;
+import com.example.restapi.dto.EmployeeResponse;
 import com.example.restapi.entity.Employee;
+import com.example.restapi.mapper.EmployeeMapper;
 import com.example.restapi.repository.EmployeeRepository;
+import com.example.restapi.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("employees")
 public class EmployeeController {
-    private EmployeeRepository employeeRepository;
+    private EmployeeService employeeService;
+    private EmployeeMapper employeeMapper;
+//    private EmployeeResponse employeeResponse;
 
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeService employeeService,EmployeeMapper employeeMapper) {
+        this.employeeService = employeeService;
+        this.employeeMapper = employeeMapper;
     }
 
     @GetMapping()
-    public List<Employee> getAllEmployees(){
-        return employeeRepository.findAll();
+    public List<EmployeeResponse> getAllEmployees(){
+        return employeeService.findAll().stream()
+                .map(employee -> employeeMapper.toResponse(employee))
+                .collect(Collectors.toList());
     }
 
+//    @GetMapping()
+//    public List<Employee> getAllEmployees(){
+//        return employeeService.findAll();
+//    }
+
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable String id) {
-        return employeeRepository.findById(id);
+    public EmployeeResponse getEmployeeById(@PathVariable String id) {
+        return employeeMapper.toResponse(employeeService.findById(id));
     }
 
     @GetMapping(params = "{gender}")
     public List<Employee> getEmployeeByGender(@RequestParam String gender){
-        return employeeRepository.findByGender(gender);
+        return employeeService.findByGender(gender);
     }
 
 
     @GetMapping(params = {"page", "pageSize"})
     public List<Employee> getEmployeeByPage(@RequestParam Integer page, @RequestParam Integer pageSize) {
-        return employeeRepository.findByPage(page, pageSize);
+        return employeeService.findByPage(page, pageSize);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee){
-        return employeeRepository.create(employee);
+    public Employee createEmployee(@RequestBody EmployeeRequest employeeRequest){
+        return employeeService.create(employeeMapper.toEntity(employeeRequest));
     }
     
     @PutMapping("/{id}")
-    public Employee editEmployee(@PathVariable String id, @RequestBody Employee updatedEmployee){
-        Employee employee = employeeRepository.findById(id);
-        if(updatedEmployee.getAge() != null){
-            employee.setAge(updatedEmployee.getAge());}
-        if(updatedEmployee.getId() != null){}{
-            employee.setSalary(updatedEmployee.getSalary());
-        }
-        return employeeRepository.save(id,employee);
+    public Employee editEmployee(@PathVariable String id, @RequestBody EmployeeRequest employeeRequest){
+//        Employee employee = employeeService.findById(id);
+//        if(updatedEmployee.getAge() != null){
+//            employee.setAge(updatedEmployee.getAge());}
+//        if(updatedEmployee.getId() != null){}{
+//            employee.setSalary(updatedEmployee.getSalary());
+//        }
+//        return employeeService.save(id,employee);
+        return employeeService.save(id,employeeMapper.toEntity(employeeRequest));
         
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public Employee deleteEmployee(@PathVariable String id){
-        Employee employee = employeeRepository.findById(id);
-        return employeeRepository.delete(employee);
+        Employee employee = employeeService.findById(id);
+        return employeeService.delete(employee);
     }
 
 
