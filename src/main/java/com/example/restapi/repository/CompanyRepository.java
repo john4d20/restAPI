@@ -21,8 +21,8 @@ public class CompanyRepository {
 
 
     public CompanyRepository() {
-        companies.add(new Company(1,"hater"));
-        companies.add(new Company(2,"hater2"));
+        companies.add(new Company("1","hater"));
+        companies.add(new Company("2","hater2"));
     }
 
     public List<Company> findAll() {
@@ -50,9 +50,9 @@ public class CompanyRepository {
 
 
     public Company create(Company company) {
-        Integer nextId = companies.stream().mapToInt(Company::getId).max().orElse(0) + 1;
-        company.setId(nextId);
-        this.companies.add(company);
+        String id = String.valueOf(companies.size()+1);
+        company.setId(id);
+        companies.add(company);
         return company;
     }
 

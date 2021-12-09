@@ -3,11 +3,11 @@ package com.example.restapi.entity;
 import java.util.List;
 
 public class Company {
-    private Integer id;
+    private String id;
     private String companyName;
 
 
-    public Company(Integer id, String companyName) {
+    public Company(String id, String companyName) {
         this.id = id;
         this.companyName = companyName;
 
@@ -17,7 +17,7 @@ public class Company {
 
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -27,7 +27,7 @@ public class Company {
 
 
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 

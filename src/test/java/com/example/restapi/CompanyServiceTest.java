@@ -53,8 +53,8 @@ public class CompanyServiceTest {
     void should_get_company_when_perform_getById_given_company_and_id() throws Exception {
         //given
         List<Company> companies = new ArrayList<>();
-        companies.add(new Company(1, "OOCL"));
-        companies.add(new Company(2, "OOCL2"));
+        companies.add(new Company("1", "OOCL"));
+        companies.add(new Company("2", "OOCL2"));
 
         given(mockCompanyRepository.findById(1))
                 .willReturn(companies.get(0));
@@ -72,8 +72,8 @@ public class CompanyServiceTest {
 
         List<Employee> employees = getEmployees();
         List<Company> companies = new ArrayList<>();
-        companies.add(new Company(1, "OOCL"));
-        companies.add(new Company(2, "OOCL2"));
+        companies.add(new Company("1", "OOCL"));
+        companies.add(new Company("2", "OOCL2"));
 
         given(mockCompanyRepository.findEmployeeById(1))
                 .willReturn(employees);
@@ -86,7 +86,7 @@ public class CompanyServiceTest {
     @Test
     void should_return_company_when_perform_post_given_company() throws Exception {
         //given
-        Company newCompany = new Company(3, "OOCL3");
+        Company newCompany = new Company("3", "OOCL3");
         given(mockCompanyRepository.create(newCompany))
                 .willReturn(newCompany);
         //when

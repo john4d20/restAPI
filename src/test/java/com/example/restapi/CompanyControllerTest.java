@@ -39,8 +39,8 @@ public class CompanyControllerTest {
     void should_get_all_companies_when_perform_get_given_companies() throws Exception {
         //given
 
-        Company company1 = new Company(1, "Spring");
-        Company company2 = new Company(2, "Spring2");
+        Company company1 = new Company("1", "Spring");
+        Company company2 = new Company("2", "Spring2");
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -50,9 +50,9 @@ public class CompanyControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/companies"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].id").isNumber())
+                .andExpect(jsonPath("$[0].id").isString())
                 .andExpect(jsonPath("$[0].companyName").value("Spring"))
-                .andExpect(jsonPath("$[1].id").isNumber())
+                .andExpect(jsonPath("$[1].id").isString())
                 .andExpect(jsonPath("$[1].companyName").value("Spring2"));
 
     }
@@ -61,8 +61,8 @@ public class CompanyControllerTest {
     void should_get_company_when_perform_getById_given_company_and_id() throws Exception {
         //given
 //        List<Employee> employees = getEmployees();
-        Company company1 = new Company(1, "Spring");
-        Company company2 = new Company(2, "Spring2");
+        Company company1 = new Company("1", "Spring");
+        Company company2 = new Company("2", "Spring2");
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -78,14 +78,14 @@ public class CompanyControllerTest {
     @Test
     void should_get_all_employee_when_get_list_given_company_id() throws Exception {
         //given
-        Company company1 = new Company(1, "Spring");
+        Company company1 = new Company("1", "Spring");
 
         companyRepository.findEmployeeById(1);
         //when`
         //then
         mockMvc.perform(MockMvcRequestBuilders.get("/companies/{id}/employees" , company1.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(jsonPath("$[0].id").isNumber())
+                .andExpect(jsonPath("$[0].id").isString())
                 .andExpect(jsonPath("$[0].name").value("john"))
                 .andExpect(jsonPath("$[0].age").value("20"))
                 .andExpect(jsonPath("$[0].gender").value("male"))
@@ -101,9 +101,9 @@ public class CompanyControllerTest {
 
     @Test
     void should_get_all_companies_when_get_by_page_given_page_and_pageSize_and_company() throws Exception {
-        Company company1 = new Company(1, "Spring");
-        Company company2 = new Company(2, "Spring2");
-        Company company3 = new Company(3, "Spring3");
+        Company company1 = new Company("1", "Spring");
+        Company company2 = new Company("2", "Spring2");
+        Company company3 = new Company("3", "Spring3");
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -137,9 +137,9 @@ public class CompanyControllerTest {
     @Test
     void should_return_changed_company_when_perform_put_given_company_id() throws Exception {
         //given
-        Company company1 = new Company(1, "Spring");
-        Company company2 = new Company(2, "Spring2");
-        Company company3 = new Company(3, "Spring3");
+        Company company1 = new Company("1", "Spring");
+        Company company2 = new Company("2", "Spring2");
+        Company company3 = new Company("3", "Spring3");
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -162,9 +162,9 @@ public class CompanyControllerTest {
     @Test
     void should_delete_company_when_perform_delete_given_company_and_id() throws Exception {
         //given
-        Company company1 = new Company(1, "Spring");
-        Company company2 = new Company(2, "Spring2");
-        Company company3 = new Company(3, "Spring3");
+        Company company1 = new Company("1", "Spring");
+        Company company2 = new Company("2", "Spring2");
+        Company company3 = new Company("3", "Spring3");
 
         companyRepository.create(company1);
         companyRepository.create(company2);
