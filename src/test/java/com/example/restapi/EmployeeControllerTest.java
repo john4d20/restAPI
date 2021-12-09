@@ -151,8 +151,8 @@ public class EmployeeControllerTest {
     @Test
     void should_delete_when_perform_delete_given_employee_id() throws Exception {
         //given
-        Employee employee = new Employee("1","john",20,"male",1000,1);
-        employeeRepository.create(employee);
+        Employee employee = new Employee("john",20,"male",1000,1);
+        employeeRepositoryNew.save(employee);
         //when
         mockMvc.perform(MockMvcRequestBuilders.delete("/employees/{id}",employee.getId()))
                 .andExpect(status().isNoContent());
@@ -161,6 +161,7 @@ public class EmployeeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/employees"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(0)));
+
     }
 
 

@@ -56,13 +56,7 @@ public class EmployeeController {
     
     @PutMapping("/{id}")
     public Employee editEmployee(@PathVariable String id, @RequestBody EmployeeRequest employeeRequest){
-//        Employee employee = employeeService.findById(id);
-//        if(updatedEmployee.getAge() != null){
-//            employee.setAge(updatedEmployee.getAge());}
-//        if(updatedEmployee.getId() != null){}{
-//            employee.setSalary(updatedEmployee.getSalary());
-//        }
-//        return employeeService.save(id,employee);
+
         return employeeService.save(id,employeeMapper.toEntity(employeeRequest));
         
     }
@@ -70,8 +64,7 @@ public class EmployeeController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteEmployee(@PathVariable String id){
-//        Employee employee = employeeService.findById(id);
-//        return employeeService.delete(employee);
+        employeeService.delete(id);
     }
 
 

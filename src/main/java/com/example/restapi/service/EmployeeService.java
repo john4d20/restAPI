@@ -53,11 +53,12 @@ public class EmployeeService {
         return employeeRepositoryNew.insert(employee);
     }
 
-    public void delete(Employee employee) {
-        employeeRepositoryNew.delete(findById(employee.getId()));
-    }
+
 
     public Employee save(String id, Employee employee) {
         return employeeRepositoryNew.save(employee);
+    }
+    public void delete(String employeeId) {
+        employeeRepositoryNew.deleteById(employeeId);
     }
 }
