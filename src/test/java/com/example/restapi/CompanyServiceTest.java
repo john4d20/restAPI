@@ -3,6 +3,7 @@ package com.example.restapi;
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.CompanyRepository;
+import com.example.restapi.repository.CompanyRepositoryNew;
 import com.example.restapi.repository.EmployeeRepositoryNew;
 import com.example.restapi.service.CompanyService;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,10 @@ public class CompanyServiceTest {
     @Mock
     CompanyRepository mockCompanyRepository;
 
+    @Mock
+    CompanyRepositoryNew mockCompanyRepositoryNew;
+
+
     @InjectMocks
     CompanyService companyService;
 
@@ -36,7 +41,7 @@ public class CompanyServiceTest {
     void should_return_all_employees_when_find_all_given_employees() {
         //given
         List<Company> companies = new ArrayList<>();
-        given(mockCompanyRepository.findAll())
+        given(mockCompanyRepositoryNew.findAll())
                 .willReturn(companies);
         //when
         List<Company> actual = companyService.findAll();

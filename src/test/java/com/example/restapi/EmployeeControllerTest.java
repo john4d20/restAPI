@@ -2,6 +2,7 @@ package com.example.restapi;
 
 import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.EmployeeRepository;
+import com.example.restapi.repository.EmployeeRepositoryNew;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,15 +28,17 @@ public class EmployeeControllerTest {
     MockMvc mockMvc;
     @Autowired
     EmployeeRepository employeeRepository;
+    @Autowired
+    EmployeeRepositoryNew employeeRepositoryNew;
 
     @BeforeEach
     void cleanRepository(){
-        employeeRepository.clearAll();
+        employeeRepositoryNew.deleteAll();
     }
 
     @AfterEach
     void cleanRepositoryAfter(){
-        employeeRepository.clearAll();
+        employeeRepositoryNew.deleteAll();
     }
 
 

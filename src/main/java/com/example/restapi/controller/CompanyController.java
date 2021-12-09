@@ -13,6 +13,7 @@ import java.util.List;
 public class CompanyController {
     CompanyRepository companyRepository;
 
+
 //    @Autowired(required = false)
     public CompanyController(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
