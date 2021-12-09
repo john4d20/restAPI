@@ -64,6 +64,7 @@ public class CompanyServiceTest {
         Company actual = companyService.findById("1");
         //then
         assertEquals(companies.get(0), actual);
+
     }
 
 
