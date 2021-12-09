@@ -118,18 +118,15 @@ public class EmployeeControllerTest {
     @Test
     void should_return_employees_when_perform_get_given_page_and_page_size() throws Exception {
         //given
-        employeeRepository.create( new Employee("1","john",20,"male",1000,1));
-        employeeRepository.create( new Employee("1","john",20,"male",1000,1));
-        employeeRepository.create( new Employee("1","john",20,"male",1000,1));
-        employeeRepository.create( new Employee("1","john",20,"male",1000,1));
-        employeeRepository.create( new Employee("1","john",20,"male",1000,1));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
         //when
         mockMvc.perform(MockMvcRequestBuilders.get("/employees?page=1&pageSize=3"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",hasSize(3)))
-                .andExpect(jsonPath("$[0].id").value(1))
-                .andExpect(jsonPath("$[1].id").value(2))
-                .andExpect(jsonPath("$[2].id").value(3));
+                .andExpect(jsonPath("$",hasSize(3)));
     }
 
     @Test

@@ -45,7 +45,7 @@ public class EmployeeService {
     }
 
     public List<Employee> findByPage(int page, int pageSize) {
-        return employeeRepositoryNew.findAll(PageRequest.of(page, pageSize)).getContent();
+        return employeeRepositoryNew.findAll(PageRequest.of(page -1 , pageSize)).getContent();
     }
 
     public Employee create(Employee employee) {
