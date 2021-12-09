@@ -133,7 +133,7 @@ public class EmployeeControllerTest {
     void should_return_edited_employee_when_perform_put_given_updated_employee() throws Exception {
         //given
         Employee employee = new Employee("1","john",20,"male",1000,1);
-        employeeRepository.create(employee);
+        employeeRepositoryNew.insert(employee);
 
         String updatedEmployee = "{\"id\": 1,\n" +
                 "                \"name\": \"john\",\n" +
