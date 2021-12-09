@@ -3,6 +3,8 @@ package com.example.restapi;
 import com.example.restapi.entity.Company;
 
 import com.example.restapi.repository.CompanyRepository;
+import com.example.restapi.repository.CompanyRepositoryNew;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,18 @@ public class CompanyControllerTest {
     @Autowired
     CompanyRepository companyRepository;
     @Autowired
+    CompanyRepositoryNew CompanyRepositoryNew;
+    @Autowired
     MockMvc mockMvc;
 
     @BeforeEach
     void cleanRepository() {
-        companyRepository.clearAll();
+        CompanyRepositoryNew.deleteAll();
+    }
+
+    @AfterEach
+    void cleanRepositoryAfter() {
+        CompanyRepositoryNew.deleteAll();
     }
 
 
@@ -44,8 +53,8 @@ public class CompanyControllerTest {
         Company company1 = new Company("1", "Spring",new ArrayList<>());
         Company company2 = new Company("2", "Spring2",new ArrayList<>());
 
-        companyRepository.create(company1);
-        companyRepository.create(company2);
+        CompanyRepositoryNew.insert(company1);
+        CompanyRepositoryNew.insert(company2);
 
         //when
         //then

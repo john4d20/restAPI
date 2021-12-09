@@ -63,6 +63,15 @@ public class CompanyService {
         }
         throw new NoCompanyFoundException();
     }
+
+    public Company create(Company company) {
+        return this.companyRepositoryNew.save(company);
+    }
+
+
+    public void delete(Company company) {
+        companyRepositoryNew.deleteById(company.getId());
+    }
 }
 
 
