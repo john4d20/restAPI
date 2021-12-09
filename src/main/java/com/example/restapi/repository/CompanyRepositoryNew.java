@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface CompanyRepositoryNew extends MongoRepository <Company, String>{
     List<Employee> findAllById();
+
+
 }
