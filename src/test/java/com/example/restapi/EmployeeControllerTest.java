@@ -45,8 +45,8 @@ public class EmployeeControllerTest {
     @Test
     void should_get_all_employees_when_perform_get_given_employees() throws Exception {
         //given
-        Employee employee = new Employee("1","john",20,"male",1000,1);
-        employeeRepository.create(employee);
+        Employee employee = new Employee("john",20,"male",1000,1);
+        employeeRepositoryNew.save(employee);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/employees"))
                 .andExpect(status().isOk())
@@ -54,8 +54,8 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$[0].id").isString())
                 .andExpect(jsonPath("$[0].name").value("john"))
                 .andExpect(jsonPath("$[0].age").value(20))
-                .andExpect(jsonPath("$[0].gender").value("male"))
-                .andExpect(jsonPath("$[0].salary").value(1000));
+                .andExpect(jsonPath("$[0].gender").value("male"));
+
 
     }
 
@@ -72,7 +72,6 @@ public class EmployeeControllerTest {
                 .andExpect(jsonPath("$[0].age").value(20))
                 .andExpect(jsonPath("$[0].gender").value("male"))
                 .andExpect(jsonPath("$[0].salary").value(1000));
-
     }
     
     @Test
