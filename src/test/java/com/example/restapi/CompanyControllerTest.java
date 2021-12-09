@@ -147,13 +147,13 @@ public class CompanyControllerTest {
     @Test
     void should_return_changed_company_when_perform_put_given_company_id() throws Exception {
         //given
-        Company company1 = new Company("1", "Spring",new ArrayList<>());
-        Company company2 = new Company("2", "Spring2",new ArrayList<>());
-        Company company3 = new Company("3", "Spring3",new ArrayList<>());
+        Company company1 = new Company( "Spring",new ArrayList<>());
+        Company company2 = new Company( "Spring2",new ArrayList<>());
+        Company company3 = new Company( "Spring3",new ArrayList<>());
 
-        companyRepository.create(company1);
-        companyRepository.create(company2);
-        companyRepository.create(company3);
+        companyRepositoryNew.insert(company1);
+        companyRepositoryNew.insert(company2);
+        companyRepositoryNew.insert(company3);
 
         String company = "{\n" +
                 "        \"id\": 1,\n" +
@@ -172,9 +172,9 @@ public class CompanyControllerTest {
     @Test
     void should_delete_company_when_perform_delete_given_company_and_id() throws Exception {
         //given
-        Company company1 = new Company("1", "Spring",new ArrayList<>());
-        Company company2 = new Company("2", "Spring2",new ArrayList<>());
-        Company company3 = new Company("3", "Spring3",new ArrayList<>());
+        Company company1 = new Company( "Spring",new ArrayList<>());
+        Company company2 = new Company( "Spring2",new ArrayList<>());
+        Company company3 = new Company( "Spring3",new ArrayList<>());
 
         companyRepository.create(company1);
         companyRepository.create(company2);
