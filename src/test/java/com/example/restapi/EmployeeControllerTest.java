@@ -15,7 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -89,9 +92,13 @@ public class EmployeeControllerTest {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.name").value("john"))
                 .andExpect(jsonPath("$.age").value(20))
-                .andExpect(jsonPath("$.gender").value("male"))
-                .andExpect(jsonPath("$.salary").value(1000));
-        //then
+                .andExpect(jsonPath("$.gender").value("male"));
+        List<Employee> employeeList = employeeRepositoryNew.findAll();
+        assertEquals(1, employeeList.size());
+        assertEquals("john", employeeList.get(0).getName());
+        assertEquals(20, employeeList.get(0).getAge());
+        assertEquals(1000, employeeList.get(0).getSalary());
+        assertEquals("male", employeeList.get(0).getGender());
     }
 
     @Test
