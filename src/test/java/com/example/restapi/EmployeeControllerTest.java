@@ -104,16 +104,15 @@ public class EmployeeControllerTest {
     @Test
     void should_return_employee_when_perform_get_given_employee_id() throws Exception {
         //given
-        Employee employee = new Employee("1","john",20,"male",1000,1);
-        employeeRepository.create(employee);
+        Employee employee = new Employee("john",20,"male",1000,1);
+        employeeRepositoryNew.insert(employee);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/employees/{id}", employee.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isString())
                 .andExpect(jsonPath("$.name").value("john"))
                 .andExpect(jsonPath("$.age").value(20))
-                .andExpect(jsonPath("$.gender").value("male"))
-                .andExpect(jsonPath("$.salary").value(1000));
+                .andExpect(jsonPath("$.gender").value("male"));
     }
 
     @Test
