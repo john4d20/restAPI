@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class EmployeeController {
     private EmployeeService employeeService;
     private EmployeeMapper employeeMapper;
-//    private EmployeeResponse employeeResponse;
+
 
     public EmployeeController(EmployeeService employeeService,EmployeeMapper employeeMapper) {
         this.employeeService = employeeService;
@@ -31,10 +31,6 @@ public class EmployeeController {
                 .collect(Collectors.toList());
     }
 
-//    @GetMapping()
-//    public List<Employee> getAllEmployees(){
-//        return employeeService.findAll();
-//    }
 
     @GetMapping("/{id}")
     public EmployeeResponse getEmployeeById(@PathVariable String id) {
@@ -73,9 +69,9 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public Employee deleteEmployee(@PathVariable String id){
-        Employee employee = employeeService.findById(id);
-        return employeeService.delete(employee);
+    public void deleteEmployee(@PathVariable String id){
+//        Employee employee = employeeService.findById(id);
+//        return employeeService.delete(employee);
     }
 
 

@@ -3,6 +3,7 @@ package com.example.restapi;
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.CompanyRepository;
+import com.example.restapi.repository.EmployeeRepositoryNew;
 import com.example.restapi.service.CompanyService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

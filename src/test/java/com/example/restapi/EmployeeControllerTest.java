@@ -2,6 +2,8 @@ package com.example.restapi;
 
 import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.EmployeeRepository;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +27,16 @@ public class EmployeeControllerTest {
     MockMvc mockMvc;
     @Autowired
     EmployeeRepository employeeRepository;
-    //    get"/employees"
-//    prepare data
-//    send request
-//    assertion
+
     @BeforeEach
     void cleanRepository(){
         employeeRepository.clearAll();
     }
+//
+//    @AfterEach
+//    void cleanRepositoryAfter(){
+//        employeeRepository.clearAll();
+//    }
 
 
     @Test

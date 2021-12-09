@@ -59,9 +59,8 @@ public class EmployeeRepository {
         return employee;
     }
 
-    public Employee delete(Employee employee) {
+    public void delete(Employee employee) {
         employees.remove(employee);
-        return employee;
 
     }
 
