@@ -32,11 +32,11 @@ public class EmployeeControllerTest {
     void cleanRepository(){
         employeeRepository.clearAll();
     }
-//
-//    @AfterEach
-//    void cleanRepositoryAfter(){
-//        employeeRepository.clearAll();
-//    }
+
+    @AfterEach
+    void cleanRepositoryAfter(){
+        employeeRepository.clearAll();
+    }
 
 
     @Test

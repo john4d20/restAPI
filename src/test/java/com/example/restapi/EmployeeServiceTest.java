@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -86,11 +87,11 @@ public class EmployeeServiceTest {
         Employee secondEmployee = new Employee("2", "john", 30, "Male", 66666,1);
         employees.add(firstEmployee);
         employees.add(secondEmployee);
-        Pageable pageable =  PageRequest.of(1,1);
+        Pageable pageable =  PageRequest.of(1,2);
         given(mockEmployeeRepositoryNew.findAll(pageable))
-                .willReturn((Page<Employee>) Collections.singletonList(secondEmployee));
+                .willReturn(new PageImpl<>(employees, PageRequest.of(1, 2), 1));
 
-        List<Employee> actual = employeeService.findByPage(1,1);
+        List<Employee> actual = employeeService.findByPage(1,2);
         assertEquals("jojo",actual.get(0).getName());
         assertEquals(29,actual.get(0).getAge());
         assertEquals("Male",actual.get(0).getGender());
@@ -100,7 +101,7 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_new_employee_when_post_given_new_employee() {
         Employee employee = new Employee("1", "Terence", 29, "Male", 66666,1);
-        given(mockEmployeeRepository.create(employee))
+        given(mockEmployeeRepositoryNew.insert(employee))
                 .willReturn(employee);
 
         Employee actual = employeeService.create(employee);
