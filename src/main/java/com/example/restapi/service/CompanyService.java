@@ -6,6 +6,7 @@ import com.example.restapi.exception.NoCompanyFoundException;
 import com.example.restapi.exception.NoFoundEmployeeException;
 import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.repository.CompanyRepositoryNew;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -33,16 +34,12 @@ public class CompanyService {
     }
 
 
-//    public List<Employee> findEmployeesByCompanyId(Integer id) {
-//        return companyRepositoryNew.findEmployeesByCompanyId(id);
-//
-//    }
-
-
-    public List<Company> findByPage(int page, int pageSize) {
-        return companyRepositoryNew.findAll(PageRequest.of(page, pageSize)).getContent();
-
+    public List<String> findEmployeesByCompanyId(String companyId) {
+        return companyRepositoryNew.findById(companyId).orElseThrow(NoCompanyFoundException::new).getEmployees();
     }
+
+
+
 
     public Company createCompany(Company company) {
         return companyRepositoryNew.insert(company);
@@ -51,6 +48,21 @@ public class CompanyService {
         return companyRepositoryNew.findById(companyId).orElseThrow(NoCompanyFoundException::new);
     }
 
+    public Company add(Company requestCompany) {
+        return this.companyRepositoryNew.save(requestCompany);
+    }
+
+    public Page<Company> findByPage(int page, int pageSize) {
+        return companyRepositoryNew.findAll(PageRequest.of(page - 1, pageSize));
+    }
+
+    public Company update(String companyId, Company updateCompany) {
+        if (companyRepositoryNew.existsById(companyId)) {
+            updateCompany.setId(companyId);
+            return companyRepositoryNew.save(updateCompany);
+        }
+        throw new NoCompanyFoundException();
+    }
 }
 
 

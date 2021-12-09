@@ -14,6 +14,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
+import java.util.ArrayList;
+
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -39,8 +41,8 @@ public class CompanyControllerTest {
     void should_get_all_companies_when_perform_get_given_companies() throws Exception {
         //given
 
-        Company company1 = new Company("1", "Spring");
-        Company company2 = new Company("2", "Spring2");
+        Company company1 = new Company("1", "Spring",new ArrayList<>());
+        Company company2 = new Company("2", "Spring2",new ArrayList<>());
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -61,8 +63,8 @@ public class CompanyControllerTest {
     void should_get_company_when_perform_getById_given_company_and_id() throws Exception {
         //given
 //        List<Employee> employees = getEmployees();
-        Company company1 = new Company("1", "Spring");
-        Company company2 = new Company("2", "Spring2");
+        Company company1 = new Company("1", "Spring",new ArrayList<>());
+        Company company2 = new Company("2", "Spring2",new ArrayList<>());
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -78,7 +80,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_all_employee_when_get_list_given_company_id() throws Exception {
         //given
-        Company company1 = new Company("1", "Spring");
+        Company company1 = new Company("1", "Spring",new ArrayList<>());
 
         companyRepository.findEmployeesByCompanyId(1);
         //when`
@@ -101,9 +103,9 @@ public class CompanyControllerTest {
 
     @Test
     void should_get_all_companies_when_get_by_page_given_page_and_pageSize_and_company() throws Exception {
-        Company company1 = new Company("1", "Spring");
-        Company company2 = new Company("2", "Spring2");
-        Company company3 = new Company("3", "Spring3");
+        Company company1 = new Company("1", "Spring",new ArrayList<>());
+        Company company2 = new Company("2", "Spring2",new ArrayList<>());
+        Company company3 = new Company("3", "Spring3",new ArrayList<>());
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -137,9 +139,9 @@ public class CompanyControllerTest {
     @Test
     void should_return_changed_company_when_perform_put_given_company_id() throws Exception {
         //given
-        Company company1 = new Company("1", "Spring");
-        Company company2 = new Company("2", "Spring2");
-        Company company3 = new Company("3", "Spring3");
+        Company company1 = new Company("1", "Spring",new ArrayList<>());
+        Company company2 = new Company("2", "Spring2",new ArrayList<>());
+        Company company3 = new Company("3", "Spring3",new ArrayList<>());
 
         companyRepository.create(company1);
         companyRepository.create(company2);
@@ -162,9 +164,9 @@ public class CompanyControllerTest {
     @Test
     void should_delete_company_when_perform_delete_given_company_and_id() throws Exception {
         //given
-        Company company1 = new Company("1", "Spring");
-        Company company2 = new Company("2", "Spring2");
-        Company company3 = new Company("3", "Spring3");
+        Company company1 = new Company("1", "Spring",new ArrayList<>());
+        Company company2 = new Company("2", "Spring2",new ArrayList<>());
+        Company company3 = new Company("3", "Spring3",new ArrayList<>());
 
         companyRepository.create(company1);
         companyRepository.create(company2);

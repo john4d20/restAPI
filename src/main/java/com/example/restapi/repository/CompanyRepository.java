@@ -21,8 +21,8 @@ public class CompanyRepository {
 
 
     public CompanyRepository() {
-        companies.add(new Company("1","hater"));
-        companies.add(new Company("2","hater2"));
+        companies.add(new Company("1","hater",new ArrayList<>()));
+        companies.add(new Company("2","hater2",new ArrayList<>()));
     }
 
     public List<Company> findAll() {
