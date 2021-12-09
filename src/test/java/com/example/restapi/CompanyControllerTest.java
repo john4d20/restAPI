@@ -176,15 +176,15 @@ public class CompanyControllerTest {
         Company company2 = new Company( "Spring2",new ArrayList<>());
         Company company3 = new Company( "Spring3",new ArrayList<>());
 
-        companyRepository.create(company1);
-        companyRepository.create(company2);
-        companyRepository.create(company3);
+        companyRepositoryNew.insert(company1);
+        companyRepositoryNew.insert(company2);
+        companyRepositoryNew.insert(company3);
         //when
         //then
         mockMvc.perform(MockMvcRequestBuilders.delete("/companies/{id}", company1.getId()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
 
-    //todo Exception
+
 
 }
