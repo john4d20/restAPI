@@ -80,7 +80,7 @@ public class CompanyControllerTest {
         //given
         Company company1 = new Company("1", "Spring");
 
-        companyRepository.findEmployeeById(1);
+        companyRepository.findEmployeesByCompanyId(1);
         //when`
         //then
         mockMvc.perform(MockMvcRequestBuilders.get("/companies/{id}/employees" , company1.getId()))
