@@ -20,7 +20,7 @@ public class CompanyController {
 
     private final CompanyMapper companyMapper;
 
-//    @Autowired(required = false)
+
     public CompanyController(CompanyService companyService, CompanyMapper companyMapper) {
         this.companyService = companyService;
         this.companyMapper = companyMapper;

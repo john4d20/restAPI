@@ -44,6 +44,7 @@ public class CompanyService {
     public Company createCompany(Company company) {
         return companyRepositoryNew.insert(company);
     }
+
     public Company findById(String companyId) {
         return companyRepositoryNew.findById(companyId).orElseThrow(NoCompanyFoundException::new);
     }

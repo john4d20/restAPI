@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document
@@ -23,6 +24,11 @@ public class Company {
 
     public Company() {
 
+    }
+
+    public Company(String companyName, List<String> employees) {
+        this.companyName = companyName;
+        this.employees = employees;
     }
 
     public void setId(String id) {
