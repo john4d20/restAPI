@@ -1,14 +1,12 @@
 package com.example.restapi.repository;
 
 import com.example.restapi.exception.NoCompanyFoundException;
-import com.example.restapi.exception.NoFoundEmployeeException;
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,7 +34,7 @@ public class CompanyRepository {
                 .orElseThrow(NoCompanyFoundException::new);
     }
 
-    public List<Employee> findEmployeesByCompanyId(Integer id) {
+    public List<Employee> findEmployeesByCompanyId(String id) {
         return employeeRepository.findByCompanyId(id);
     }
 

@@ -4,6 +4,7 @@ import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.repository.CompanyRepositoryNew;
+import com.example.restapi.repository.EmployeeRepositoryNew;
 import com.example.restapi.service.CompanyService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.BDDMockito.given;
@@ -28,8 +31,8 @@ import static org.mockito.Mockito.when;
 public class CompanyServiceTest {
     private List<Employee> getEmployees() {
         List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee("1", "john", 22, "male", 1000, 1));
-        employees.add(new Employee("2", "john", 22, "male", 1000, 1));
+        employees.add(new Employee("1", "john", 22, "male", 1000, "61b1b8f9d63d36b42ef04399"));
+        employees.add(new Employee("2", "john", 22, "male", 1000, "61b1b8f9d63d36b42ef04399"));
         return employees;
     }
     @Mock
@@ -37,6 +40,9 @@ public class CompanyServiceTest {
 
     @Mock
     CompanyRepositoryNew mockCompanyRepositoryNew;
+
+    @Mock
+    EmployeeRepositoryNew mockEmployeeRepositoryNew;
 
 
     @InjectMocks
@@ -74,19 +80,22 @@ public class CompanyServiceTest {
 
 
     @Test
-    void should_return_specific_company_employee_list_when_get_company_employee_list_given_companies_company_id() {
-        //given
-        Company company = new Company("1","My Company", new ArrayList<>());
-        List<String> expected = new ArrayList<>();
-        when(mockCompanyRepositoryNew.findById("1")).thenReturn(java.util.Optional.of(company));
+    void should_return_employee_list_when_get_list_given_company_id() {
 
-        companyService.add(new Company("2","My Company", expected));
+        Company company = new Company("Company");
+        List<Employee> employees = Stream.of(new Employee("Anna",3,"female",2,"1"))
+                .collect(Collectors.toList());
 
+        given(mockEmployeeRepositoryNew.findAllByCompanyId("1"))
+                .willReturn(employees);
         //when
-        final List<String> actual = companyService.findEmployeesByCompanyId("1");
-
+        System.out.println(employees.size());
+        System.out.println(company.getId());
         //then
-        assertEquals(expected, actual);
+        List<Employee> actual = companyService.findEmployeesByCompanyId("1");
+        assertEquals(employees, actual);
+
+
     }
 
 

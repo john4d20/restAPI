@@ -2,8 +2,11 @@ package com.example.restapi;
 
 import com.example.restapi.entity.Company;
 
+import com.example.restapi.entity.Employee;
 import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.repository.CompanyRepositoryNew;
+import com.example.restapi.repository.EmployeeRepository;
+import com.example.restapi.repository.EmployeeRepositoryNew;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +20,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,6 +38,8 @@ public class CompanyControllerTest {
     CompanyRepositoryNew companyRepositoryNew;
     @Autowired
     MockMvc mockMvc;
+    @Autowired
+    EmployeeRepositoryNew employeeRepositoryNew;
 
     @BeforeEach
     void cleanRepository() {
@@ -71,7 +78,7 @@ public class CompanyControllerTest {
     @Test
     void should_get_company_when_perform_getById_given_company_and_id() throws Exception {
         //given
-//        List<Employee> employees = getEmployees();
+
         Company company1 = new Company( "Spring",new ArrayList<>());
         Company company2 = new Company( "Spring2",new ArrayList<>());
 
@@ -86,25 +93,27 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$.companyName").value("Spring"));
     }
 
-//    @Test
-//    void should_get_all_employee_when_get_list_given_company_id() throws Exception {
-//        //given
-//        List employees = new ArrayList<>();
-//        employees.add(new Employee("john",20,"male",1000,1));
-//        Company company1 = new Company("Spring",employees);
-//
-//
-//        CompanyRepositoryNew.save(company1);
-//        //when`
-//        //then
-//        mockMvc.perform(MockMvcRequestBuilders.get("/companies/{id}/employees" , company1.getId()))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(jsonPath("$[0].name").value("john"))
-//                .andExpect(jsonPath("$[0].age").value("20"))
-//                .andExpect(jsonPath("$[0].gender").value("male"))
-//                .andExpect(jsonPath("$[0].salary").value("1000"))
-//                .andExpect(jsonPath("$[0].companyId").value("1"));
-//    }
+    @Test
+    void should_get_employees_when_perform_get_given_company_id() throws Exception {
+        //given
+        Company company1 = new Company( "John Ltd");
+        companyRepositoryNew.insert(company1);
+        Company company2 = new Company( "John Company");
+        companyRepositoryNew.insert(company2);
+        Employee employeeJohn = new Employee("John", 20,"M", 20, company1.getId());
+        employeeRepositoryNew.insert(employeeJohn);
+        Employee employeeAnna = new Employee("Anna", 20,"F", 99999, company1.getId());
+        employeeRepositoryNew.insert(employeeAnna);
+        //when
+        //then
+        System.out.println(company1.getId());
+        mockMvc.perform((MockMvcRequestBuilders.get(  "/companies/{id}/employees", company1.getId())))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").isString())
+                .andExpect((jsonPath("$[0].name")).value("John"))
+                .andExpect((jsonPath("$[0].age").value(20)))
+                .andExpect((jsonPath("$[0].gender").value("M")));
+    }
 
     @Test
     void should_get_all_companies_when_get_by_page_given_page_and_pageSize_and_company() throws Exception {
@@ -183,6 +192,20 @@ public class CompanyControllerTest {
         //then
         mockMvc.perform(MockMvcRequestBuilders.delete("/companies/{id}", company1.getId()))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
+
+    @Test
+    void should_return_employee_when_perform_given_employee() throws Exception {
+
+        String companies = "{\n" +
+                "        \"companyName\": \"hater3\"\n" +
+                "    }";
+
+        mockMvc.perform(post("/companies")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(companies))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.companyName").value("hater3"));
     }
 
 

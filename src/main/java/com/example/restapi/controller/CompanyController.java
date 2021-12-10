@@ -2,8 +2,8 @@ package com.example.restapi.controller;
 
 import com.example.restapi.dto.CompanyResponse;
 import com.example.restapi.entity.Company;
+import com.example.restapi.entity.Employee;
 import com.example.restapi.mapper.CompanyMapper;
-import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +37,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}/employees")
-    public List<String> getEmployeesByCompanyId(@PathVariable String id) {
+    public List<Employee> getEmployeesByCompanyId(@PathVariable String id) {
         return companyService.findEmployeesByCompanyId(id);
     }
 

@@ -12,9 +12,9 @@ public class Employee {
     private Integer age;
     private String gender;
     private Integer salary;
-    private Integer companyId;
+    private String companyId;
 
-    public Employee(String id, String name, Integer age, String gender, Integer salary,Integer companyId) {
+    public Employee(String id, String name, Integer age, String gender, Integer salary,String companyId) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -23,7 +23,7 @@ public class Employee {
         this.companyId = companyId;
     }
 
-    public Employee(String name, Integer age, String gender, Integer salary,Integer companyId) {
+    public Employee(String name, Integer age, String gender, Integer salary,String companyId) {
 
         this.name = name;
         this.age = age;
@@ -35,11 +35,11 @@ public class Employee {
     public Employee() {
     }
 
-    public Integer getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(Integer companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 

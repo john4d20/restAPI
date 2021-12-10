@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +34,7 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_all_employees_when_get_given_employees() {
         List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee("1", "Terence", 29, "Male", 66666,1));
+        employees.add(new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399"));
         given(mockEmployeeRepositoryNew.findAll())
                 .willReturn(employees);
 
@@ -44,15 +43,14 @@ public class EmployeeServiceTest {
         assertEquals(employees, actual);
     }
 
-//    TODO delete set , and employee -> updatedEmployee
+
     @Test
     public void should_return_updated_employee_when_edit_given_updated_employee() {
-        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,1);
-        Employee updatedEmployee = new Employee("1", "Jooo", 19, "Female", 18888,1);
+        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399");
+        Employee updatedEmployee = new Employee("1", "Jooo", 19, "Female", 18888,"61b1b8f9d63d36b42ef04399");
         given(mockEmployeeRepositoryNew.findById(any()))
                 .willReturn(java.util.Optional.of(employee));
-        employee.setAge(updatedEmployee.getAge());
-        employee.setSalary(updatedEmployee.getSalary());
+
         given(mockEmployeeRepositoryNew.save(any(Employee.class)))
                 .willReturn(employee);
 
@@ -62,7 +60,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void should_return_employee_when_get_given_ID() {
-        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,1);
+        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399");
         given(mockEmployeeRepositoryNew.findById("1"))
                 .willReturn(java.util.Optional.of(employee));
         Employee actual = employeeService.findById(employee.getId());
@@ -71,7 +69,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void should_return_employee_when_get_given_gender() {
-        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,1);
+        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399");
         List<Employee> employees = Collections.singletonList(employee);
         given(mockEmployeeRepositoryNew.findAllByGender("Male"))
                 .willReturn(employees);
@@ -83,8 +81,8 @@ public class EmployeeServiceTest {
     @Test
     public void should_return_employees_when_get_given_page_and_page_size() {
         List<Employee> employees = new ArrayList<>();
-        Employee firstEmployee = new Employee("1", "jojo", 29, "Male", 1,1);
-        Employee secondEmployee = new Employee("2", "john", 30, "Male", 66666,1);
+        Employee firstEmployee = new Employee("1", "jojo", 29, "Male", 1,"61b1b8f9d63d36b42ef04399");
+        Employee secondEmployee = new Employee("2", "john", 30, "Male", 66666,"61b1b8f9d63d36b42ef04399");
         employees.add(firstEmployee);
         employees.add(secondEmployee);
         Pageable pageable =  PageRequest.of(1,2);
@@ -100,7 +98,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void should_return_new_employee_when_post_given_new_employee() {
-        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,1);
+        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399");
         given(mockEmployeeRepositoryNew.insert(employee))
                 .willReturn(employee);
 
@@ -110,7 +108,7 @@ public class EmployeeServiceTest {
 
     @Test
     public void should_delete_when_delete_given_employee() {
-        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,1);
+        Employee employee = new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399");
         mockEmployeeRepositoryNew.insert(employee);
         mockEmployeeRepositoryNew.delete(employee);
 

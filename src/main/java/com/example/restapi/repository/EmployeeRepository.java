@@ -14,11 +14,11 @@ public class EmployeeRepository {
     private List<Employee> employees = new ArrayList<>();
 
     public EmployeeRepository() {
-        employees.add(new Employee("1","john",20,"male",2000,1));
-        employees.add(new Employee("2","john2",20,"male",2000,1));
-        employees.add(new Employee("3","john3",20,"male",2000,1));
-        employees.add(new Employee("4","john4",20,"male",2000,1));
-        employees.add(new Employee("5","john5",20,"male",2000,1));
+        employees.add(new Employee("1","john",20,"male",2000,"61b1b8f9d63d36b42ef04399"));
+        employees.add(new Employee("2","john2",20,"male",2000,"61b1b8f9d63d36b42ef04399"));
+        employees.add(new Employee("3","john3",20,"male",2000,"61b1b8f9d63d36b42ef04399"));
+        employees.add(new Employee("4","john4",20,"male",2000,"61b1b8f9d63d36b42ef04399"));
+        employees.add(new Employee("5","john5",20,"male",2000,"61b1b8f9d63d36b42ef04399"));
     }
 
     public List<Employee> findAll() {
@@ -68,7 +68,7 @@ public class EmployeeRepository {
         employees.clear();;
     }
 
-    public List<Employee> findByCompanyId(Integer id) {
+    public List<Employee> findByCompanyId(String id) {
         return employees.stream().filter(employee -> employee.getCompanyId().equals(id)).collect(Collectors.toList());
     }
 }

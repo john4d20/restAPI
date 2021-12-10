@@ -48,7 +48,7 @@ public class EmployeeControllerTest {
     @Test
     void should_get_all_employees_when_perform_get_given_employees() throws Exception {
         //given
-        Employee employee = new Employee("john",20,"male",1000,1);
+        Employee employee = new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399");
         employeeRepositoryNew.save(employee);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/employees"))
@@ -65,7 +65,7 @@ public class EmployeeControllerTest {
     @Test
     void should_get_employee_when_perform_get_given_gender() throws Exception {
         //given
-        Employee employee = new Employee("john",20,"male",1000,1);
+        Employee employee = new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399");
         employeeRepositoryNew.insert(employee);
         mockMvc.perform(MockMvcRequestBuilders.get("/employees?gender=male"))
                 .andExpect(status().isOk())
@@ -104,7 +104,7 @@ public class EmployeeControllerTest {
     @Test
     void should_return_employee_when_perform_get_given_employee_id() throws Exception {
         //given
-        Employee employee = new Employee("john",20,"male",1000,1);
+        Employee employee = new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399");
         employeeRepositoryNew.insert(employee);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/employees/{id}", employee.getId()))
@@ -118,21 +118,21 @@ public class EmployeeControllerTest {
     @Test
     void should_return_employees_when_perform_get_given_page_and_page_size() throws Exception {
         //given
-        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
-        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
-        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
-        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
-        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,1));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399"));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399"));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399"));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399"));
+        employeeRepositoryNew.insert( new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399"));
         //when
         mockMvc.perform(MockMvcRequestBuilders.get("/employees?page=1&pageSize=3"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$",hasSize(3)));
+                .andExpect(jsonPath("$",hasSize(2)));
     }
 
     @Test
     void should_return_edited_employee_when_perform_put_given_updated_employee() throws Exception {
         //given
-        Employee employee = new Employee("1","john",20,"male",1000,1);
+        Employee employee = new Employee("1","john",20,"male",1000,"61b1b8f9d63d36b42ef04399");
         employeeRepositoryNew.insert(employee);
 
         String updatedEmployee = "{\"id\": 1,\n" +
@@ -151,7 +151,7 @@ public class EmployeeControllerTest {
     @Test
     void should_delete_when_perform_delete_given_employee_id() throws Exception {
         //given
-        Employee employee = new Employee("john",20,"male",1000,1);
+        Employee employee = new Employee("john",20,"male",1000,"61b1b8f9d63d36b42ef04399");
         employeeRepositoryNew.save(employee);
         //when
         mockMvc.perform(MockMvcRequestBuilders.delete("/employees/{id}",employee.getId()))

@@ -3,9 +3,8 @@ package com.example.restapi.service;
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
 import com.example.restapi.exception.NoCompanyFoundException;
-import com.example.restapi.exception.NoFoundEmployeeException;
-import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.repository.CompanyRepositoryNew;
+import com.example.restapi.repository.EmployeeRepositoryNew;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,27 +14,21 @@ import java.util.List;
 @Service
 public class CompanyService {
     private CompanyRepositoryNew companyRepositoryNew;
+    private EmployeeRepositoryNew employeeRepositoryNew;
 
-    public CompanyService(CompanyRepositoryNew companyRepositoryNew) {
+    public CompanyService(CompanyRepositoryNew companyRepositoryNew,EmployeeRepositoryNew employeeRepositoryNew) {
         this.companyRepositoryNew = companyRepositoryNew;
+        this.employeeRepositoryNew = employeeRepositoryNew;
     }
 
     public List<Company> findAll() {
         return companyRepositoryNew.findAll();
     }
 
-    public Company editCompany(String id, Company updatedCompany) {
-        Company company = findById(id);
-        if (updatedCompany.getCompanyName() != null) {
-            company.setCompanyName(updatedCompany.getCompanyName());
-        }
-        return companyRepositoryNew.save(company);
-
-    }
 
 
-    public List<String> findEmployeesByCompanyId(String companyId) {
-        return companyRepositoryNew.findById(companyId).orElseThrow(NoCompanyFoundException::new).getEmployees();
+    public List<Employee> findEmployeesByCompanyId(String companyId) {
+        return employeeRepositoryNew.findAllByCompanyId(companyId);
     }
 
 
