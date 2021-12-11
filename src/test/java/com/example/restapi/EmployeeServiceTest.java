@@ -18,9 +18,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
@@ -109,9 +112,11 @@ public class EmployeeServiceTest {
     @Test
     public void should_delete_when_delete_given_employee() {
         Employee employee = new Employee("1", "Terence", 29, "Male", 66666,"61b1b8f9d63d36b42ef04399");
-        mockEmployeeRepositoryNew.insert(employee);
-        mockEmployeeRepositoryNew.delete(employee);
 
-        assertEquals(mockEmployeeRepository.findAll().size(), 0);
+        employeeService.create(employee);
+        //when
+        employeeService.delete("1");
+        //then
+        verify(mockEmployeeRepositoryNew, times(1)).deleteById("1");
     }
 }
