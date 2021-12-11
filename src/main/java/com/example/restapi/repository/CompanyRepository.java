@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @Repository
 public class CompanyRepository {
     @Autowired
-    EmployeeRepository employeeRepository;
+    EmployeeRepositoryNew employeeRepositoryNew;
 
     private List<Company> companies = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class CompanyRepository {
     }
 
     public List<Employee> findEmployeesByCompanyId(String id) {
-        return employeeRepository.findByCompanyId(id);
+        return employeeRepositoryNew.findAllByCompanyId(id);
     }
 
 

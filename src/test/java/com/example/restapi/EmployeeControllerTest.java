@@ -1,9 +1,7 @@
 package com.example.restapi;
 
 import com.example.restapi.entity.Employee;
-import com.example.restapi.repository.EmployeeRepository;
 import com.example.restapi.repository.EmployeeRepositoryNew;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,8 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EmployeeControllerTest {
     @Autowired
     MockMvc mockMvc;
-    @Autowired
-    EmployeeRepository employeeRepository;
+
     @Autowired
     EmployeeRepositoryNew employeeRepositoryNew;
 

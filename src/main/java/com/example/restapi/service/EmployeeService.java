@@ -2,7 +2,6 @@ package com.example.restapi.service;
 
 import com.example.restapi.entity.Employee;
 import com.example.restapi.exception.NoFoundEmployeeException;
-import com.example.restapi.repository.EmployeeRepository;
 import com.example.restapi.repository.EmployeeRepositoryNew;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -11,11 +10,11 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-    private EmployeeRepository employeeRepository;
+
     private EmployeeRepositoryNew employeeRepositoryNew;
 
-    public EmployeeService(EmployeeRepository employeeRepository, EmployeeRepositoryNew employeeRepositoryNew) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeService( EmployeeRepositoryNew employeeRepositoryNew) {
+
         this.employeeRepositoryNew = employeeRepositoryNew;
     }
 

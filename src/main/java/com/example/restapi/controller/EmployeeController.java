@@ -4,7 +4,6 @@ import com.example.restapi.dto.EmployeeRequest;
 import com.example.restapi.dto.EmployeeResponse;
 import com.example.restapi.entity.Employee;
 import com.example.restapi.mapper.EmployeeMapper;
-import com.example.restapi.repository.EmployeeRepository;
 import com.example.restapi.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
