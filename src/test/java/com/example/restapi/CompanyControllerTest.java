@@ -3,9 +3,7 @@ package com.example.restapi;
 import com.example.restapi.entity.Company;
 
 import com.example.restapi.entity.Employee;
-import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.repository.CompanyRepositoryNew;
-
 import com.example.restapi.repository.EmployeeRepositoryNew;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,8 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CompanyControllerTest {
-    @Autowired
-    CompanyRepository companyRepository;
+
     @Autowired
     CompanyRepositoryNew companyRepositoryNew;
     @Autowired

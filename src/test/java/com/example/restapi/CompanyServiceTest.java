@@ -2,7 +2,6 @@ package com.example.restapi;
 
 import com.example.restapi.entity.Company;
 import com.example.restapi.entity.Employee;
-import com.example.restapi.repository.CompanyRepository;
 import com.example.restapi.repository.CompanyRepositoryNew;
 import com.example.restapi.repository.EmployeeRepositoryNew;
 import com.example.restapi.service.CompanyService;
@@ -17,7 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,8 +33,7 @@ public class CompanyServiceTest {
         employees.add(new Employee("2", "john", 22, "male", 1000, "61b1b8f9d63d36b42ef04399"));
         return employees;
     }
-    @Mock
-    CompanyRepository mockCompanyRepository;
+
 
     @Mock
     CompanyRepositoryNew mockCompanyRepositoryNew;
